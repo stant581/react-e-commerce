@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { Routes, Route , Link} from 'react-router-dom';
+import { AuthProvider } from './Components/AuthContext';
+
+// Components
+import SignIn from './Pages/SingIn';
+import SignUp from './Pages/SignUp';
+import Dashboard from './Pages/Dashboard';
+import LandingPage from './Pages/Landing';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
+      {/* Wrap the entire application in the AuthProvider */}
+      <AuthProvider>
+        <Routes>
+          {/* Public Landing Page (Home) */}
+          <Route path="/" element={<LandingPage />} />
+
+          {/* Authentication Pages */}
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+
+          {/* Protected Route Group */}
+          {/* Only accessible if a user is logged in (via AuthContext) */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+
+          {/* 404 Fallback */}
+          <Route path="*" element={<div style={{ textAlign: 'center', marginTop: '50px' }}><h1>404 Not Found</h1><Link to="/">Go Home</Link></div>} />
+        </Routes>
+      </AuthProvider>
+    </div>
+  );
 }
 
-export default App
+export default App;
