@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { useTheme } from "./themeContext";
+import { useCart } from "./CartContext";
+import { Cart } from "react-bootstrap-icons";
+
 
 const Navbar = () => {
   const { user, signout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { cart } = useCart();
 
   const navStyle = {
     display: "flex",
@@ -31,6 +35,28 @@ const Navbar = () => {
             <Link to="/dashboard" style={{ textDecoration: "none", color: theme === "dark" ? "#fff" : "#000" }}>
               Dashboard
             </Link>
+            <Link to="/cart" style={{ textDecoration: "none", position: "relative" }}>
+            <Cart
+              size={24}
+              color={theme === "light" ? "#212529" : "#fff"} 
+            />
+            {cart.length > 0 && (
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-5px",
+                  right: "-8px",
+                  background: "red",
+                  color: "white",
+                  fontSize: "12px",
+                  borderRadius: "50%",
+                  padding: "2px 6px",
+                }}
+              >
+                {cart.length}
+              </span>
+            )}
+          </Link>
             <button
               onClick={signout}
               style={{

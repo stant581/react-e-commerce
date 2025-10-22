@@ -10,6 +10,7 @@ import LandingPage from './Pages/Landing';
 import ProtectedRoute from './Components/ProtectedRoute';
 import ProductDetails from './Pages/ProductDetails';
 import NavBar from './Components/NavBar';
+import CartPage from './Pages/CartPage';
 function App() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif' }}>
@@ -29,6 +30,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
 
           {/* 404 Fallback */}
