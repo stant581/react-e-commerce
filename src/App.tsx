@@ -1,4 +1,4 @@
-// src/App.tsx
+import React, { useState } from 'react';
 import { Routes, Route , Link} from 'react-router-dom';
 import { AuthProvider } from './Components/AuthContext';
 
@@ -11,6 +11,8 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import ProductDetails from './Pages/ProductDetails';
 import NavBar from './Components/NavBar';
 import CartPage from './Pages/CartPage';
+import Footer from './Pages/Footer';
+import SearchResults from './Pages/SearchResults';
 function App() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif' }}>
@@ -31,11 +33,13 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/search/:query" element={<SearchResults />} />
           </Route>
 
           {/* 404 Fallback */}
           <Route path="*" element={<div style={{ textAlign: 'center', marginTop: '50px' }}><h1>404 Not Found</h1><Link to="/">Go Home</Link></div>} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </div>
   );

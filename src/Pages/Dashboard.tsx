@@ -18,14 +18,15 @@ const Dashboard: React.FC = () => {
 
       <Row className="g-4">
         {products.map((product) => (
-          <Col key={product.id} xs={12} sm={6} md={4} lg={3}>
+          <Col key={product.id} xs={1} sm={2} md={3} lg={3}>
             <Card className="h-100 shadow-sm border-0 hover-card">
               <Card.Img
                 variant="top"
                 src={product.thumbnail}
                 style={{
-                  height: "200px",
-                  objectFit: "cover",
+                  width: "auto",
+                  height: "auto",
+                  objectFit: "contain",
                   borderTopLeftRadius: "0.5rem",
                   borderTopRightRadius: "0.5rem",
                 }}
